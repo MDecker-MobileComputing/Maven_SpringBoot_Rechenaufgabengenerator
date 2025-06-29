@@ -27,6 +27,7 @@ import de.eldecker.spring.rechenaufgabengenerator.logik.RechenaufgabenService;
 @RequestMapping( "/api/v1" )
 public class RechenaufgabeRestController {
 
+    /** Bean mit Geschäftslogik zur Erzeugung von Rechenaufgaben im PDF-Format. */
     @Autowired
     private RechenaufgabenService _rechenaufgabenService;
     
