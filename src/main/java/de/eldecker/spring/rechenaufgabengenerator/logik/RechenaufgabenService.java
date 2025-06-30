@@ -1,5 +1,6 @@
 package de.eldecker.spring.rechenaufgabengenerator.logik;
 
+
 import static com.lowagie.text.Element.ALIGN_CENTER;
 import static com.lowagie.text.Font.BOLD;
 import static com.lowagie.text.FontFactory.HELVETICA;
@@ -31,6 +32,7 @@ public class RechenaufgabenService {
     
     private static Logger LOG = LoggerFactory.getLogger( RechenaufgabenService.class );
     
+    
     /** Schriftart für Überschrift (groß+fett). */
     private static final Font FONT_TITEL = FontFactory.getFont( HELVETICA, 16, BOLD );
 
@@ -59,7 +61,7 @@ public class RechenaufgabenService {
             final Document document = new Document();
             final PdfWriter pdfWriter = PdfWriter.getInstance( document, bos );
             
-            pdfWriter.setPageEvent( new SeitenzahlFooter() );
+            pdfWriter.setPageEvent( new Fusszeile() );
 
             metadatenSetzen( document, spec );
 

@@ -1,6 +1,6 @@
 package de.eldecker.spring.rechenaufgabengenerator.logik;
 
-import static de.eldecker.spring.rechenaufgabengenerator.logik.ZahlenFormatierer.formatiereZahl;
+import static de.eldecker.spring.rechenaufgabengenerator.helferlein.ZahlenFormatierer.formatiereZahl;
 
 import java.util.Random;
 

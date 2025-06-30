@@ -1,4 +1,4 @@
-package de.eldecker.spring.rechenaufgabengenerator.logik;
+package de.eldecker.spring.rechenaufgabengenerator.helferlein;
 
 import static java.util.Locale.GERMAN;
 
