@@ -2,10 +2,6 @@ package de.eldecker.spring.rechenaufgabengenerator.logik;
 
 import static de.eldecker.spring.rechenaufgabengenerator.logik.ZahlenFormatierer.formatiereZahl;
 
-import static java.util.Locale.GERMAN;
-
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Random;
 
 

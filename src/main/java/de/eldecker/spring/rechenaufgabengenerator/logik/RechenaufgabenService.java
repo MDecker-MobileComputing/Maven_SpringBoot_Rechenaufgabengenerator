@@ -57,7 +57,9 @@ public class RechenaufgabenService {
             final BufferedOutputStream  bos  = new BufferedOutputStream( baos );
 
             final Document document = new Document();
-            PdfWriter.getInstance( document, bos );
+            final PdfWriter pdfWriter = PdfWriter.getInstance( document, bos );
+            
+            pdfWriter.setPageEvent( new SeitenzahlFooter() );
 
             metadatenSetzen( document, spec );
 
@@ -90,8 +92,11 @@ public class RechenaufgabenService {
      * @param document PDF-Dokument
      * 
      * @param nutzerName Name des Nutzers, für den Tagebucheinträge in PDF geschrieben werden sollen.
+     * 
+     * @throws DocumentException Fehler bei PDF-Erzeugung
      */
-   private void inhaltSchreiben( Document document, Rechenaufgabe[] rechenaufgabenArray ) throws DocumentException {
+   private void inhaltSchreiben( Document document, Rechenaufgabe[] rechenaufgabenArray ) 
+		   throws DocumentException {
        
        final Paragraph titelAbsatz = new Paragraph( "Rechenaufgaben (Addition/Subtraktion)", FONT_TITEL );
        titelAbsatz.setAlignment( ALIGN_CENTER );
@@ -106,7 +111,10 @@ public class RechenaufgabenService {
        
        for ( int i = 0; i < rechenaufgabenArray.length; i++ ) {
            
-           final Cell zelle = new Cell( new Paragraph( rechenaufgabenArray[i].toString(), FONT_FETT ) );
+    	   final Paragraph absatzMitRechenaufgabe = 
+    			   new Paragraph( rechenaufgabenArray[i].toString(), FONT_FETT );
+    	   
+           final Cell zelle = new Cell( absatzMitRechenaufgabe );
            zelle.setBorder( 0 ); // Keine Zellenrahmen
            
            tabelle.addCell( zelle );
