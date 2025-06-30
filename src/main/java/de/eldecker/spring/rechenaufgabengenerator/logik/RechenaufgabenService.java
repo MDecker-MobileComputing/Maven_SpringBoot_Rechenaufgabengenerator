@@ -41,24 +41,15 @@ public class RechenaufgabenService {
     /**
      * Erzeugt ein PDF-Dokument mit Rechenaufgaben.
      * 
-     * @param min1 Min-Wert für erste Zahl
-     * 
-     * @param max1 Max-Wert für erste Zahl
-     * 
-     * @param min2 Min-Wert für zweite Zahl
-     * 
-     * @param max2 Max-Wert für zweite Zahl
-     * 
-     * @param anzahl Anzahl der Rechenaufgaben, die erzeugt werden sollen
-     * 
+     * @param spec Spezifikation der Aufgaben: Zahlenbereich, Anzahl Aufgaben
+     *  
      * @return ByteArrayOutputStream mit PDF-Dokument, das die Rechenaufgaben enthält
      * 
      * @throws PdfExportException wenn ein Fehler bei der PDF-Erzeugung auftritt
      */
-    public ByteArrayOutputStream erzeugePdf( int min1, int max1, int min2, int max2, 
-                                             int anzahl ) throws PdfExportException {
+    public ByteArrayOutputStream erzeugePdf( RechenaufgabenSpec spec ) throws PdfExportException {
         
-        final Rechenaufgabe[] rechenaufgabenArray = erzeugeRechenaufgaben( min1, max1, min2, max2, anzahl );
+        final Rechenaufgabe[] rechenaufgabenArray = erzeugeRechenaufgaben( spec );
         
         try {
 
@@ -68,7 +59,7 @@ public class RechenaufgabenService {
             final Document document = new Document();
             PdfWriter.getInstance( document, bos );
 
-            metadatenSetzen( document );
+            metadatenSetzen( document, spec );
 
             document.open();
 
@@ -79,7 +70,7 @@ public class RechenaufgabenService {
             bos.flush();
             bos.close();
 
-            LOG.info( "PDF mit {} Rechenaufgaben erzeugt.", anzahl ); 
+            LOG.info( "PDF mit Rechenaufgaben erzeugt: {}", spec ); 
 
             return baos;
         }
@@ -109,9 +100,9 @@ public class RechenaufgabenService {
        
        // Tabelle mit 2 Spalten erstellen
        final Table tabelle = new Table( 2 );
-       tabelle.setWidth( 100 ); // 100% der Seitenbreite
+       tabelle.setWidth( 100 );     // 100% der Seitenbreite
        tabelle.setBorderWidth( 0 ); // Keine sichtbaren Rahmen
-       tabelle.setSpacing( 10 ); // Abstand zwischen Zellen
+       tabelle.setSpacing( 10 );    // Abstand zwischen Zellen
        
        for ( int i = 0; i < rechenaufgabenArray.length; i++ ) {
            
@@ -136,40 +127,35 @@ public class RechenaufgabenService {
     /**
      * Metadaten in PDF-Dokument setzen.
      * 
-     * @param document PDF-Dokument
+     * @param document PDF-Dokument, in dem Metadaten zu setzen sind
+     * 
+     * @param spec Spezifikation der zu erzeugenden Rechenaufgaben mit Zahlenbereichen
+     *             und Anzahl der Aufgaben 
      */
-    private void metadatenSetzen( Document document ) {
+    private void metadatenSetzen( Document document, RechenaufgabenSpec spec ) {
         
         document.addTitle   ( "Rechenaufgaben"                                    );
         document.addSubject ( "Rechenaufgaben Addition und Subtraktion"           );
         document.addCreator ( "Spring-Boot-Anwendung \"Rechenaufgabengenerator\"" );
-        document.addKeywords( "plus, minus"                                       );
+        document.addKeywords( spec.toString()                                     );
     }
     
     
     /**
      * Eigentliche Erzeugung der Rechenaufgaben.
      * 
-     * @param min1 Min-Wert für erste Zahl
-     * 
-     * @param max1 Max-Wert für erste Zahl
-     * 
-     * @param min2 Min-Wert für zweite Zahl
-     * 
-     * @param max2 Max-Wert für zweite Zahl
-     * 
-     * @param anzahl Anzahl der Rechenaufgaben, die erzeugt werden sollen
+     * @param spec Spezifikation der zu erzeugenden Rechenaufgaben mit Zahlenbereichen
+     *             und Anzahl der Aufgaben 
      * 
      * @return Array mit Rechenaufgaben
      */
-    private Rechenaufgabe[] erzeugeRechenaufgaben( int min1, int max1, int min2, int max2, 
-                                                   int anzahl ) {
+    private Rechenaufgabe[] erzeugeRechenaufgaben( RechenaufgabenSpec spec ) {
         
-        final Rechenaufgabe[] rechenaufgabenArray = new Rechenaufgabe[ anzahl ];
+        final Rechenaufgabe[] rechenaufgabenArray = new Rechenaufgabe[ spec.anzahl() ];
         
-        for ( int i = 0; i < anzahl; i++ ) {
+        for ( int i = 0; i < spec.anzahl(); i++ ) {
             
-            rechenaufgabenArray[i] = new Rechenaufgabe( min1, max1, min2, max2 );
+            rechenaufgabenArray[i] = new Rechenaufgabe( spec );
         }
         
         return rechenaufgabenArray;

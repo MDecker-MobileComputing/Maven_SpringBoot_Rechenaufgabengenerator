@@ -1,0 +1,41 @@
+package de.eldecker.spring.rechenaufgabengenerator.logik;
+
+import static de.eldecker.spring.rechenaufgabengenerator.logik.ZahlenFormatierer.formatiereZahl;
+import static java.lang.String.format;
+
+
+/**
+ * Spezifikation der zu erzeugenden Rechenaufgaben mit Zahlenbereichen
+ * und Anzahl der Aufgaben.
+ */
+public record RechenaufgabenSpec( int zahl1min,
+		                          int zahl1max,
+		                          int zahl2min,
+		                          int zahl2max,
+		                          int anzahl
+		                         ) {
+	
+	/**
+	 * String-Repräsentation des Objekts. 
+	 * Beispielausgabe:
+	 * <pre>
+	 * 50 Rechenaufgaben mit zahl1 in [ 1.050, 9.000 ] und zahl2 in [ 120, 900 ]
+	 * </pre>
+	 * 
+	 * @return String mit Anzahl Aufgaben und Wertebereichen         
+	 */
+	@Override
+	public String toString() {
+
+	
+		return format(
+					"%s Rechenaufgaben mit zahl1 in [ %s, %s ] und zahl2 in [ %s, %s ]",
+					formatiereZahl( anzahl   ),
+					formatiereZahl( zahl1min ),
+					formatiereZahl( zahl1max ),
+					formatiereZahl( zahl2min ),
+					formatiereZahl( zahl2max ) 
+			);
+	}
+	
+}

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import de.eldecker.spring.rechenaufgabengenerator.logik.PdfExportException;
 import de.eldecker.spring.rechenaufgabengenerator.logik.RechenaufgabenService;
+import de.eldecker.spring.rechenaufgabengenerator.logik.RechenaufgabenSpec;
 
 
 /**
@@ -58,7 +59,12 @@ public class RechenaufgabeRestController {
                                                 @RequestParam( "anzahl"   ) int anzahl ) 
                                           throws PdfExportException {
 
-        final ByteArrayOutputStream pdfStream           = _rechenaufgabenService.erzeugePdf( zahl1min, zahl1max, zahl2min, zahl2max, anzahl );
+    	final RechenaufgabenSpec spec = 
+    			new RechenaufgabenSpec( zahl1min, zahl1max, zahl2min, zahl2max, anzahl );  
+    	
+        final ByteArrayOutputStream pdfStream = _rechenaufgabenService.erzeugePdf( spec );         			 
+        					                         
+        
         final ByteArrayInputStream  pdfInputStream      = new ByteArrayInputStream( pdfStream.toByteArray() );
         final InputStreamResource   inputStreamResource = new InputStreamResource( pdfInputStream );
         

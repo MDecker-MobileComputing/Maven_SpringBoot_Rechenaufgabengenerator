@@ -1,5 +1,7 @@
 package de.eldecker.spring.rechenaufgabengenerator.logik;
 
+import static de.eldecker.spring.rechenaufgabengenerator.logik.ZahlenFormatierer.formatiereZahl;
+
 import static java.util.Locale.GERMAN;
 
 import java.text.DecimalFormat;
@@ -19,9 +21,7 @@ public class Rechenaufgabe {
      * Klassenvariable für abwechselnd Plus/Minus.
      */
     private static boolean sIstPlus = false;
-    
-    /** Formatierer, der Tausendertrennpunkte einfügt. */
-    private static DecimalFormat sZahlenFormatierer = erzeugeDecimalFormat();
+        
     
     /** Operand 1. */
     private int _zahl1;
@@ -34,15 +34,17 @@ public class Rechenaufgabe {
     
     /** Wenn {@code true}, dann Addition, sonst Subtraktion. */
     private boolean _istAddition;
-
+       
     
     /**
      * Neue Rechenaufgabe erzeugen.
+     * 
+     * @param spec Spezifikation Rechenaufgabe mit Wertebereiche der Zahlen
      */
-    public Rechenaufgabe( int min1, int max1, int min2, int max2 ) {
+    public Rechenaufgabe( RechenaufgabenSpec spec ) {
         
-        _zahl1 = getZufallszahlNotMod10( min1, max1 );
-        _zahl2 = getZufallszahlNotMod10( min2, max2 );
+        _zahl1 = getZufallszahlNotMod10( spec.zahl1min(), spec.zahl1max() );
+        _zahl2 = getZufallszahlNotMod10( spec.zahl2min(), spec.zahl2max() );
        
         _istAddition = getPlusMinusAbwechselnd();
         
@@ -56,20 +58,7 @@ public class Rechenaufgabe {
         }
     }
     
-    
-    /**
-     * Zahlenformatierer erzeugen.
-     * 
-     * @return Zahlenformatierer, der Tausendertrennpunkte einfügt.
-     */
-    private static DecimalFormat erzeugeDecimalFormat() {
         
-        final DecimalFormatSymbols symbole = new DecimalFormatSymbols( GERMAN );
-        symbole.setGroupingSeparator( '.' );
-        
-        return new DecimalFormat( "#,###", symbole );
-    }
-    
     
     /**
      * Methode erzeugt ungerade Zufallszahlen in bestimmten Bereich,
@@ -125,8 +114,8 @@ public class Rechenaufgabe {
     @Override
     public String toString() {
         
-        final String zahl1str = sZahlenFormatierer.format( _zahl1 );
-        final String zahl2str = sZahlenFormatierer.format( _zahl2 );
+        final String zahl1str = formatiereZahl( _zahl1 );
+        final String zahl2str = formatiereZahl( _zahl2 );
         
         return String.format( "%s %s %s = ", 
                               zahl1str, operatorAlsString(), zahl2str );
@@ -140,12 +129,13 @@ public class Rechenaufgabe {
      */
     public String toStringMitErgebnis() {
         
-        final String zahl1str = sZahlenFormatierer.format( _zahl1    );
-        final String zahl2str = sZahlenFormatierer.format( _zahl2    );
-        final String ergebStr = sZahlenFormatierer.format( _ergebnis );        
+        final String zahl1str = formatiereZahl( _zahl1    );
+        final String zahl2str = formatiereZahl( _zahl2    );
+        final String ergebStr = formatiereZahl( _ergebnis );        
         
         return String.format( "%s %s %s = %s", 
-                              zahl1str, operatorAlsString(), zahl2str, ergebStr );        
+                              zahl1str, operatorAlsString(), zahl2str, 
+                              ergebStr );        
     }
     
 }
