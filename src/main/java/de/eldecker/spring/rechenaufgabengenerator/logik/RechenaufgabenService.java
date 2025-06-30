@@ -25,7 +25,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 
 /**
- * Klasse mit Geschäftslogik zur Erzeugung von Rechenaufgaben.
+ * Klasse mit Geschäftslogik zur Erzeugung von Rechenaufgaben im PDF-Format.
  */
 @Service
 public class RechenaufgabenService {
@@ -58,7 +58,7 @@ public class RechenaufgabenService {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             final BufferedOutputStream  bos  = new BufferedOutputStream( baos );
 
-            final Document document = new Document();
+            final Document  document  = new Document();
             final PdfWriter pdfWriter = PdfWriter.getInstance( document, bos );
             
             pdfWriter.setPageEvent( new Fusszeile() );
@@ -67,7 +67,9 @@ public class RechenaufgabenService {
 
             document.open();
 
-            inhaltSchreiben( document, rechenaufgabenArray );
+            inhaltSchreiben( document, rechenaufgabenArray, false ); // Aufgaben
+            document.newPage();
+            inhaltSchreiben( document, rechenaufgabenArray, true  ); // Musterlösung
 
             document.close();
 
@@ -93,14 +95,21 @@ public class RechenaufgabenService {
      * 
      * @param document PDF-Dokument
      * 
-     * @param nutzerName Name des Nutzers, für den Tagebucheinträge in PDF geschrieben werden sollen.
+     * @param nutzerName Name des Nutzers, für den Tagebucheinträge in PDF geschrieben werden sollen
+     * 
+     * @param musterloesung Wenn {@code true} dann werden die Ergebnisse mit ausgegeben, sonst nicht                
      * 
      * @throws DocumentException Fehler bei PDF-Erzeugung
      */
-   private void inhaltSchreiben( Document document, Rechenaufgabe[] rechenaufgabenArray ) 
-		   throws DocumentException {
+   private void inhaltSchreiben( Document        document, 
+		                         Rechenaufgabe[] rechenaufgabenArray, 
+		                         boolean         musterloesung 
+		                       ) 
+		                    throws DocumentException {
        
-       final Paragraph titelAbsatz = new Paragraph( "Rechenaufgaben (Addition/Subtraktion)", FONT_TITEL );
+	   final String    titel       = musterloesung ? "Musterlösung" : "Rechenaufgaben zu Addition/Subtraktion";
+       final Paragraph titelAbsatz = new Paragraph( titel, FONT_TITEL );
+       
        titelAbsatz.setAlignment( ALIGN_CENTER );
        titelAbsatz.setSpacingAfter( 20 );
        document.add( titelAbsatz );
@@ -113,8 +122,10 @@ public class RechenaufgabenService {
        
        for ( int i = 0; i < rechenaufgabenArray.length; i++ ) {
            
-    	   final Paragraph absatzMitRechenaufgabe = 
-    			   new Paragraph( rechenaufgabenArray[i].toString(), FONT_FETT );
+    	   final String aufgabe = musterloesung ? rechenaufgabenArray[i].toStringMitErgebnis() : 
+    			                                  rechenaufgabenArray[i].toString();    		                                      
+    	   
+    	   final Paragraph absatzMitRechenaufgabe = new Paragraph( aufgabe, FONT_FETT );     			   
     	   
            final Cell zelle = new Cell( absatzMitRechenaufgabe );
            zelle.setBorder( 0 ); // Keine Zellenrahmen
@@ -144,10 +155,9 @@ public class RechenaufgabenService {
      */
     private void metadatenSetzen( Document document, RechenaufgabenSpec spec ) {
         
-        document.addTitle   ( "Rechenaufgaben"                                    );
-        document.addSubject ( "Rechenaufgaben Addition und Subtraktion"           );
-        document.addCreator ( "Spring-Boot-Anwendung \"Rechenaufgabengenerator\"" );
-        document.addKeywords( spec.toString()                                     );
+        document.addTitle   ( "Rechenaufgaben zu Addition/Subtraktion mit Musterlösung" );
+        document.addSubject ( spec.toString()                                           );
+        document.addCreator ( "Spring-Boot-Anwendung \"Rechenaufgabengenerator\""       );
     }
     
     

@@ -28,7 +28,8 @@ public class Fusszeile extends PdfPageEventHelper {
 
 
     /**
-     * Event-Handler-Methode, wird aufgerufen, wenn eine Seite fertig ist
+     * Event-Handler-Methode, wird aufgerufen, wenn eine Seite fertig ist;
+     * fügt Seitenzahl links und Datum+Uhrzeit rechts dazu.
      */
     @Override
     public void onEndPage( PdfWriter writer, Document document ) {
@@ -39,6 +40,9 @@ public class Fusszeile extends PdfPageEventHelper {
     }
     
     
+    /**
+     * Seitenzahl in Fußzeile hinzufügen.
+     */
     private void addSeitenzahl( PdfWriter writer, Document document ) {
     	
         final PdfContentByte cb = writer.getDirectContent();
@@ -59,7 +63,10 @@ public class Fusszeile extends PdfPageEventHelper {
         );
     }
     
-    
+
+    /**
+     * Datum+Uhrzeit in Fußzeile rechts hinzufügen.
+     */
     private void addDatumUhrzeit( PdfWriter writer, Document document ) {
     	
     	final PdfContentByte cb = writer.getDirectContent();
