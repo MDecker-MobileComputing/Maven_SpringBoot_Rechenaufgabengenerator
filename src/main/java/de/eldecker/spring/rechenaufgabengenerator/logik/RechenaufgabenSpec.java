@@ -19,17 +19,16 @@ public record RechenaufgabenSpec( int zahl1min,
 	 * String-Repräsentation des Objekts. 
 	 * Beispielausgabe:
 	 * <pre>
-	 * 50 Rechenaufgaben mit zahl1 in [ 1.050, 9.000 ] und zahl2 in [ 120, 900 ]
+	 * 36 Rechenaufgaben mit zahl1 aus Bereich 1.050-9.000 und zahl2 aus Bereich 120-900.
 	 * </pre>
 	 * 
 	 * @return String mit Anzahl Aufgaben und Wertebereichen         
 	 */
 	@Override
 	public String toString() {
-
 	
 		return format(
-					"%s Rechenaufgaben mit zahl1 in [ %s, %s ] und zahl2 in [ %s, %s ]",
+					"%s Rechenaufgaben mit zahl1 aus Bereich %s-%s und zahl2 aus Bereich %s-%s.",
 					formatiereZahl( anzahl   ),
 					formatiereZahl( zahl1min ),
 					formatiereZahl( zahl1max ),
