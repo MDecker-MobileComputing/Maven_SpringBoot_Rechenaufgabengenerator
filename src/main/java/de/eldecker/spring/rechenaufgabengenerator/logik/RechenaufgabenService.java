@@ -61,7 +61,7 @@ public class RechenaufgabenService {
             final Document  document  = new Document();
             final PdfWriter pdfWriter = PdfWriter.getInstance( document, bos );
             
-            pdfWriter.setPageEvent( new Fusszeile() );
+            pdfWriter.setPageEvent( new FusszeilenErzeuger() );
 
             metadatenSetzen( document, spec );
 

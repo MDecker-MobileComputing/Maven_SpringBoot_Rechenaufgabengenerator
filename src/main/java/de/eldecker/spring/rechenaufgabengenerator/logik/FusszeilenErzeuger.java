@@ -20,7 +20,7 @@ import com.lowagie.text.pdf.PdfWriter;
 /**
  * Event-Handler für Erzeugen von Fußzeile.
  */
-public class Fusszeile extends PdfPageEventHelper {
+public class FusszeilenErzeuger extends PdfPageEventHelper {
 
     private static final Font SCHRIFTART = FontFactory.getFont( HELVETICA, 10, NORMAL );
     
