@@ -18,7 +18,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 
 /**
- * Event-Handler für Erzeugen von Fußzeile.
+ * Event-Handler für Erzeugen von Fußzeile mit Seitenzahl (links) und Datum+Uhrzeit (rechts).
  */
 public class FusszeilenErzeuger extends PdfPageEventHelper {
 
@@ -49,7 +49,7 @@ public class FusszeilenErzeuger extends PdfPageEventHelper {
 
         final String seitenzahlText = "Seite " + writer.getPageNumber();
 
-        final float x1 = document.left();        // Linker Rand
+        final float x1 = document.left();  // Linker Rand
         final float y  = document.bottom() - ABSTAND_RAND_VERTIKAL; // Unmittelbar unter dem Inhalt
 
         final Phrase seitenzahlPhrase = new Phrase( seitenzahlText, SCHRIFTART );
