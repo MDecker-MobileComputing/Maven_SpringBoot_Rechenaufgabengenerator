@@ -130,15 +130,15 @@ public class RechenaufgabenService {
            final Cell zelle = new Cell( absatzMitRechenaufgabe );
            zelle.setBorder( 0 ); // Keine Zellenrahmen
            
-           tabelle.addCell( zelle );
+           tabelle.addCell( zelle );                      
+       }
+       
+       // Falls ungerade Anzahl von Aufgaben, leere Zelle hinzufügen
+       if ( rechenaufgabenArray.length % 2 != 0 ) {
            
-           // Falls ungerade Anzahl von Aufgaben, leere Zelle hinzufügen
-           if ( i == rechenaufgabenArray.length - 1 && rechenaufgabenArray.length % 2 != 0 ) {
-               
-               final Cell leereZelle = new Cell( new Paragraph( "", FONT_FETT ) );
-               leereZelle.setBorder( 0 );
-               tabelle.addCell( leereZelle );
-           }
+           final Cell leereZelle = new Cell( new Paragraph( "", FONT_FETT ) );
+           leereZelle.setBorder( 0 );
+           tabelle.addCell( leereZelle );
        }
        
        document.add( tabelle );
