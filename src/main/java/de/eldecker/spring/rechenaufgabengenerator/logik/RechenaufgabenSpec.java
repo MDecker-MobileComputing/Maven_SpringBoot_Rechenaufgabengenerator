@@ -7,6 +7,16 @@ import static java.lang.String.format;
 /**
  * Spezifikation der zu erzeugenden Rechenaufgaben mit Zahlenbereichen
  * und Anzahl der Aufgaben.
+ * 
+ * @param zahl1min Untergrenze für erste Zahl
+ * 
+ * @param zahl1max Obergrenze für erste Zahl
+ * 
+ * @param zahl2min Untergrenze für zweite Zahl
+ * 
+ * @param zahl2max Obergrenze für zweite Zahl
+ * 
+ * @param anzahl Anzahl der Rechenaufgaben, die erzeugt werden sollen 
  */
 public record RechenaufgabenSpec( int zahl1min,
 		                          int zahl1max,
@@ -24,6 +34,8 @@ public record RechenaufgabenSpec( int zahl1min,
 	 * 
 	 * @return String mit Anzahl Aufgaben und Wertebereichen         
 	 */
+	
+	
 	@Override
 	public String toString() {
 	

@@ -36,39 +36,38 @@ public class RechenaufgabeRestController {
     /**
      * REST-Endpunkt, der ein PDF-Dokument mit Rechenaufgaben generiert.
      * 
-     * @param min1 Min-Wert für erste Zahl
+     * @param min1 Untergrenze für erste Zahl
      * 
-     * @param max1 Max-Wert für erste Zahl
+     * @param max1 Obergrenze für erste Zahl
      * 
-     * @param min2 Min-Wert für zweite Zahl
+     * @param min2 Untergrenze für zweite Zahl
      * 
-     * @param max2 Max-Wert für zweite Zahl
+     * @param max2 Obergrenze für zweite Zahl
      * 
      * @param anzahl Anzahl der Rechenaufgaben, die erzeugt werden sollen
      * 
      * @return HTTP-Response mit PDF-Dokument als Body.
      * 
      * @throws PdfExportException Fehler bei PDF-Erzeugung aufgetreten
-     */
-    
-    
+     */        
     @GetMapping( value = "/rechenaufgaben", produces = APPLICATION_PDF_VALUE )
     public ResponseEntity<InputStreamResource> generatePDF( 
-                                                @RequestParam( "zahl1min" ) int zahl1min,
-                                                @RequestParam( "zahl1max" ) int zahl1max,
-                                                @RequestParam( "zahl2min" ) int zahl2min,
-                                                @RequestParam( "zahl2max" ) int zahl2max,
-                                                @RequestParam( "anzahl"   ) int anzahl ) 
+	                                                @RequestParam( "zahl1min" ) int zahl1min,
+	                                                @RequestParam( "zahl1max" ) int zahl1max,
+	                                                @RequestParam( "zahl2min" ) int zahl2min,
+	                                                @RequestParam( "zahl2max" ) int zahl2max,
+	                                                @RequestParam( "anzahl"   ) int anzahl    
+                                               ) 
                                           throws PdfExportException {
-
     	final RechenaufgabenSpec spec = 
     			new RechenaufgabenSpec( zahl1min, zahl1max, zahl2min, zahl2max, anzahl );  
     	
         final ByteArrayOutputStream pdfStream = _rechenaufgabenService.erzeugePdf( spec );         			 
-        					                         
-        
-        final ByteArrayInputStream  pdfInputStream      = new ByteArrayInputStream( pdfStream.toByteArray() );
-        final InputStreamResource   inputStreamResource = new InputStreamResource( pdfInputStream );
+        					                                 
+        final ByteArrayInputStream  pdfInputStream = 
+        								new ByteArrayInputStream( pdfStream.toByteArray() );
+        final InputStreamResource   inputStreamResource = 
+        								new InputStreamResource( pdfInputStream );
         
         final HttpHeaders httpHeaders = erzeugeHeader();
         
@@ -92,9 +91,11 @@ public class RechenaufgabeRestController {
      * <pre>
      * inline; filename=Rechenaufgaben_1751385035786.pdf
      * </pre>
+     * Die lange Zahl am Ende des Dateinamens repräsentiert Datum/Uhrzeit in
+     * Form der Millisekunden seit dem 1. Januar 1970.
      *
      * @return Header-Objekt für {@code ResponseEntity}
-     */
+     */        
     private HttpHeaders erzeugeHeader() {
 
         final String contentDispositionHeader = 
