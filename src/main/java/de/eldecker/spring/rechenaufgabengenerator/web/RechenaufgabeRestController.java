@@ -50,6 +50,8 @@ public class RechenaufgabeRestController {
      * 
      * @throws PdfExportException Fehler bei PDF-Erzeugung aufgetreten
      */
+    
+    
     @GetMapping( value = "/rechenaufgaben", produces = APPLICATION_PDF_VALUE )
     public ResponseEntity<InputStreamResource> generatePDF( 
                                                 @RequestParam( "zahl1min" ) int zahl1min,
@@ -78,16 +80,25 @@ public class RechenaufgabeRestController {
     
     
     /**
-     * Erzeugt HTTP-Header "Content-Disposition", laut dem der Browser die Datei herunterladen soll
-     * (und nicht versuchen soll, sie anzuzeigen). Dieser Header enthält auch einen Vorschlag für den
-     * Dateinamen.
+     * Erzeugt HTTP-Header "Content-Disposition", mit dem der Dateiname der PDF-Datei
+     * beim Download bestimmt wird. Wegen Attribut "inline" wird die PDF-Datei zuerst
+     * im Browser angezeigt, der Nutzer kann sie dann bei Gefallen herunterladen,
+     * wobei der mit {@code filename} gesetzte Dateiname vorgeschlagen würde.
+     * Wenn die PDF-Datei immer sofort heruntergeladen werden soll, dann ist
+     * statt "inline" der Wert "attachment" zu verwenden.
+     * <br><br>
+     * 
+     * Beispielwert für Header "Content-Disposition":
+     * <pre>
+     * inline; filename=Rechenaufgaben_1751385035786.pdf
+     * </pre>
      *
      * @return Header-Objekt für {@code ResponseEntity}
      */
     private HttpHeaders erzeugeHeader() {
 
         final String contentDispositionHeader = 
-                        String.format( "attachment; filename=Rechenaufgaben_%d.pdf",
+                        String.format( "inline; filename=Rechenaufgaben_%d.pdf",
                                        System.currentTimeMillis() );
         
         final HttpHeaders headers = new HttpHeaders();
