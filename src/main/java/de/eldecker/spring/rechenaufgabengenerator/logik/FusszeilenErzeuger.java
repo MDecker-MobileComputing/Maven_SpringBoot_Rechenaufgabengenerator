@@ -34,7 +34,6 @@ public class FusszeilenErzeuger extends PdfPageEventHelper {
     @Override
     public void onEndPage( PdfWriter writer, Document document ) {
 
-
     	addSeitenzahl(   writer, document );
     	addDatumUhrzeit( writer, document );
     }
