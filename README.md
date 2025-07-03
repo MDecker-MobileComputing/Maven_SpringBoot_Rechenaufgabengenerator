@@ -2,8 +2,9 @@
 
 <br>
 
-Dieses Repo enthält eine Spring-Boot-Anwendung, die einen REST-Endpunkt zum 
+Dieses Repo enthält eine Spring-Boot-Anwendung, die einen REST-Endpunkt zum
 Download von zufällig erzeugten Rechenaufgaben im PDF-Format enthält.
+Siehe [diese Datei](Beispiel.pdf) für ein Beispiel.
 
 <br>
 
