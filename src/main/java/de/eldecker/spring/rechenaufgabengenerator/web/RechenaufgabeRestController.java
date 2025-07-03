@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import de.eldecker.spring.rechenaufgabengenerator.logik.RechenaufgabenSpec;
  */
 @Controller
 @RequestMapping( "/api/v1" )
+@Profile( "!konsole" )
 public class RechenaufgabeRestController {
 
     /** Bean mit Geschäftslogik zur Erzeugung von Rechenaufgaben im PDF-Format. */
