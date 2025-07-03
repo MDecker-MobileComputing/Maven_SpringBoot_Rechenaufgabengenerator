@@ -4,7 +4,7 @@
 
 Dieses Repo enthält eine Spring-Boot-Anwendung, die einen REST-Endpunkt zum
 Download von zufällig erzeugten Rechenaufgaben im PDF-Format enthält.
-Siehe [diese Datei](Rechenaufgaben_2025-07-03_10-18.pdf) für ein Beispiel.
+Siehe [diese Datei](Rechenaufgaben_Beispiel.pdf) für ein Beispiel.
 
 <br>
 
