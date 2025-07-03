@@ -84,16 +84,14 @@ public class RechenaufgabeRestController {
      * beim Download bestimmt wird. Wegen Attribut "inline" wird die PDF-Datei zuerst
      * im Browser angezeigt, der Nutzer kann sie dann bei Gefallen herunterladen,
      * wobei der mit {@code filename} gesetzte Dateiname vorgeschlagen würde.
-     * Wenn die PDF-Datei immer sofort heruntergeladen werden soll, dann ist
-     * statt "inline" der Wert "attachment" zu verwenden.
+     * Wenn die PDF-Datei immer sofort heruntergeladen werden soll, dann ist statt
+     * "inline" der Wert "attachment" zu verwenden.
      * <br><br>
      * 
      * Beispielwert für Header "Content-Disposition":
      * <pre>
      * inline; filename=Rechenaufgaben_2025-07-03_08-07.pdf
      * </pre>
-     * Die lange Zahl am Ende des Dateinamens repräsentiert Datum/Uhrzeit in
-     * Form der Millisekunden seit dem 1. Januar 1970.
      *
      * @return Header-Objekt für {@code ResponseEntity}
      */        
