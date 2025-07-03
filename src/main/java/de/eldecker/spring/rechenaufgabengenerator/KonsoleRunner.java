@@ -3,7 +3,6 @@ package de.eldecker.spring.rechenaufgabengenerator;
 import static de.eldecker.spring.rechenaufgabengenerator.helferlein.DatumHelferlein.getDatumUndZeitStringFuerDateiname;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
