@@ -1,5 +1,6 @@
 package de.eldecker.spring.rechenaufgabengenerator.web;
 
+import static de.eldecker.spring.rechenaufgabengenerator.helferlein.DatumHelferlein.getDatumUndZeitStringFuerDateiname;
 import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 import static org.springframework.http.MediaType.APPLICATION_PDF;
 import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
@@ -89,7 +90,7 @@ public class RechenaufgabeRestController {
      * 
      * Beispielwert für Header "Content-Disposition":
      * <pre>
-     * inline; filename=Rechenaufgaben_1751385035786.pdf
+     * inline; filename=Rechenaufgaben_2025-07-03_08-07.pdf
      * </pre>
      * Die lange Zahl am Ende des Dateinamens repräsentiert Datum/Uhrzeit in
      * Form der Millisekunden seit dem 1. Januar 1970.
@@ -99,8 +100,8 @@ public class RechenaufgabeRestController {
     private HttpHeaders erzeugeHeader() {
 
         final String contentDispositionHeader = 
-                        String.format( "inline; filename=Rechenaufgaben_%d.pdf",
-                                       System.currentTimeMillis() );
+                        String.format( "inline; filename=Rechenaufgaben_%s.pdf",
+                        		       getDatumUndZeitStringFuerDateiname() );
         
         final HttpHeaders headers = new HttpHeaders();
         headers.add( CONTENT_DISPOSITION, contentDispositionHeader );

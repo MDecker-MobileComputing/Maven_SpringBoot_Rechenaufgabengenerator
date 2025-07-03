@@ -1,6 +1,6 @@
 package de.eldecker.spring.rechenaufgabengenerator.logik;
 
-import static de.eldecker.spring.rechenaufgabengenerator.helferlein.DatumHelferlein.getDatumUndZeitSring;
+import static de.eldecker.spring.rechenaufgabengenerator.helferlein.DatumHelferlein.getDatumUndZeitString;
 
 import static com.lowagie.text.Element.ALIGN_LEFT;
 import static com.lowagie.text.Element.ALIGN_RIGHT;
@@ -70,7 +70,7 @@ public class FusszeilenErzeuger extends PdfPageEventHelper {
     	
     	final PdfContentByte cb = writer.getDirectContent();
     	
-        final String datumZeitString = getDatumUndZeitSring();
+        final String datumZeitString = getDatumUndZeitString();
 
         final float x2 = document.right();
         final float y  = document.bottom() - ABSTAND_RAND_VERTIKAL; 
