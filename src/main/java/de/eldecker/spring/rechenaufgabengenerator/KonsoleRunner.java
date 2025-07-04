@@ -26,7 +26,7 @@ import de.eldecker.spring.rechenaufgabengenerator.logik.RechenaufgabenSpec;
 @Profile( "konsole" )
 public class KonsoleRunner implements CommandLineRunner {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KonsoleRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger( KonsoleRunner.class );
 
 
     /** Bean mit Geschäftslogik zur Erzeugung von Rechenaufgaben im PDF-Format. */
