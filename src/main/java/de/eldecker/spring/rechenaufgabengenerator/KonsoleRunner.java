@@ -76,7 +76,7 @@ public class KonsoleRunner implements CommandLineRunner {
             System.exit( 2 );
         }
         
-        System.exit(0); // Anwendung explizit beenden
+        System.exit( 0 ); // Anwendung explizit beenden
     }
     
 }
