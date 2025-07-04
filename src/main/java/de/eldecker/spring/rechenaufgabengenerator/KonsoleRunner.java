@@ -47,8 +47,8 @@ public class KonsoleRunner implements CommandLineRunner {
 
             final RechenaufgabenSpec spec = new RechenaufgabenSpec(
             		1_050, 9_050,  // zahl1 im Bereich 1.050 bis 9.050
-                      120,  900,   // zahl2 im Bereich   120 bis   900
-                       72          // 72 Aufgaben => knapp 2 Seiten
+                      120,   900,  // zahl2 im Bereich   120 bis   900
+                              72   // 72 Aufgaben => knapp 2 Seiten
             );
 
             final ByteArrayOutputStream pdfStream = 
@@ -59,7 +59,8 @@ public class KonsoleRunner implements CommandLineRunner {
 
             try ( FileOutputStream fos = new FileOutputStream( dateiname ) ) { // throws FileNotFoundException
             	
-                fos.write( pdfStream.toByteArray() ); // throws IOException
+            	final byte[] byteArray = pdfStream.toByteArray(); 
+                fos.write( byteArray ); // throws IOException
             }
 
             LOG.info( "PDF-Datei erfolgreich erstellt: {}", dateiname );
