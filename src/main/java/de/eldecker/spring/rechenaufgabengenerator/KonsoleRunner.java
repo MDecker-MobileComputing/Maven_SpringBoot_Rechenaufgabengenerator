@@ -28,6 +28,7 @@ public class KonsoleRunner implements CommandLineRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(KonsoleRunner.class);
 
+
     /** Bean mit Geschäftslogik zur Erzeugung von Rechenaufgaben im PDF-Format. */
     @Autowired
     private RechenaufgabenService _rechenaufgabenService;
@@ -41,7 +42,6 @@ public class KonsoleRunner implements CommandLineRunner {
      */
     @Override
     public void run( String... args ) throws Exception {
-
 
         try {
 
