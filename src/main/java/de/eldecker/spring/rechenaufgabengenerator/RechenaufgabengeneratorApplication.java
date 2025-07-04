@@ -1,8 +1,8 @@
 package de.eldecker.spring.rechenaufgabengenerator;
 
+import static java.lang.System.getProperty;
+import static java.util.Arrays.asList;
 import static org.springframework.boot.WebApplicationType.NONE;
-
-import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,10 +18,10 @@ public class RechenaufgabengeneratorApplication {
 
 		final SpringApplication app = new SpringApplication( RechenaufgabengeneratorApplication.class );
 
-		// Wenn "konsole"-Profil aktiv ist, dann Web-Umgebung deaktivieren,
+		// Wenn das Profil "konsole" aktiv ist, dann Web-Umgebung deaktivieren,
 		// damit Anwendung nach Erzeugung PDF sich beendet
-		if ( Arrays.asList( args ).contains( "--spring.profiles.active=konsole" ) ||
-		     System.getProperty( "spring.profiles.active", "" ).contains( "konsole" ) ) {
+		if ( asList( args ).contains( "--spring.profiles.active=konsole" ) ||
+		     getProperty( "spring.profiles.active", "" ).contains( "konsole" ) ) {
 
 			app.setWebApplicationType( NONE );
 		}
