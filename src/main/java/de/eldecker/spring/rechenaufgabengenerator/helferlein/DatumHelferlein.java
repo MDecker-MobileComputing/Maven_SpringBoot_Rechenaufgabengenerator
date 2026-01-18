@@ -19,6 +19,7 @@ public class DatumHelferlein {
 	private static final DateTimeFormatter FORMATIERER2 = 
 			DateTimeFormatter.ofPattern( "YYYY-MM-dd_HH-mm" );
 	
+	
 	/**
 	 * Methode gibt aktuelles Datum und Zeit für Verwendung auf PDF-Seite
 	 * zurück. 
