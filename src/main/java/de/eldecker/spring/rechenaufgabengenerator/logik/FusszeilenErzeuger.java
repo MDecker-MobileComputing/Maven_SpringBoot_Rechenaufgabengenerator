@@ -1,20 +1,20 @@
 package de.eldecker.spring.rechenaufgabengenerator.logik;
 
 import static de.eldecker.spring.rechenaufgabengenerator.helferlein.DatumHelferlein.getDatumUndZeitString;
+import static org.openpdf.text.Element.ALIGN_LEFT;
+import static org.openpdf.text.Element.ALIGN_RIGHT;
 
-import static com.lowagie.text.Element.ALIGN_LEFT;
-import static com.lowagie.text.Element.ALIGN_RIGHT;
-import static com.lowagie.text.Font.NORMAL;
-import static com.lowagie.text.FontFactory.HELVETICA;
+import org.openpdf.text.Document;
+import org.openpdf.text.Font;
+import org.openpdf.text.FontFactory;
+import org.openpdf.text.Phrase;
+import org.openpdf.text.pdf.ColumnText;
+import org.openpdf.text.pdf.PdfContentByte;
+import org.openpdf.text.pdf.PdfPageEventHelper;
+import org.openpdf.text.pdf.PdfWriter;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.ColumnText;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfPageEventHelper;
-import com.lowagie.text.pdf.PdfWriter;
+
+import static org.openpdf.text.FontFactory.HELVETICA_BOLD;
 
 
 /**
@@ -22,7 +22,7 @@ import com.lowagie.text.pdf.PdfWriter;
  */
 public class FusszeilenErzeuger extends PdfPageEventHelper {
 
-    private static final Font SCHRIFTART = FontFactory.getFont( HELVETICA, 10, NORMAL );
+    private static final Font SCHRIFTART = FontFactory.getFont( HELVETICA_BOLD, 10 );
     
     private static final int ABSTAND_RAND_VERTIKAL = 15;
 

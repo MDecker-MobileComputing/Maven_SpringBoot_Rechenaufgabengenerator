@@ -1,10 +1,16 @@
 package de.eldecker.spring.rechenaufgabengenerator.logik;
 
+import static org.openpdf.text.ElementTags.ALIGN_CENTER;
+import static org.openpdf.text.FontFactory.HELVETICA_BOLD;
 
-import static com.lowagie.text.Element.ALIGN_CENTER;
-import static com.lowagie.text.Font.BOLD;
-import static com.lowagie.text.FontFactory.HELVETICA;
-
+import org.openpdf.text.Cell;
+import org.openpdf.text.Document;
+import org.openpdf.text.DocumentException;
+import org.openpdf.text.Font;
+import org.openpdf.text.FontFactory;
+import org.openpdf.text.Paragraph;
+import org.openpdf.text.Table;
+import org.openpdf.text.pdf.PdfWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,15 +19,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
-
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Table;
-import com.lowagie.text.Cell;
-import com.lowagie.text.pdf.PdfWriter;
 
 
 /**
@@ -34,10 +31,10 @@ public class RechenaufgabenService {
     
     
     /** Schriftart für Überschrift (groß+fett). */
-    private static final Font FONT_TITEL = FontFactory.getFont( HELVETICA, 16, BOLD );
+    private static final Font FONT_TITEL = FontFactory.getFont( HELVETICA_BOLD, 16 );
 
     /** Fette Schrift normaler Größe. */
-    private static final Font FONT_FETT = FontFactory.getFont( HELVETICA, 12, BOLD );
+    private static final Font FONT_FETT = FontFactory.getFont( HELVETICA_BOLD, 12 );
 
     
     /**
